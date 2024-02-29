@@ -39,15 +39,13 @@ public class Modelo {
     Crea los diferentes métodos borrar (para huesped, habitación y reserva).
     Crea los diferentes métodos get, que deben devolver una nueva lista conteniendo nuevas instancias no una copia de los elementos.
     */
-    public void insertar(Huesped huesped)throws OperationNotSupportedException {
+    public void insertar(Huesped huesped){
         try{
             huespedes.insertar(huesped);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
         }catch(NullPointerException e){
             throw new NullPointerException(e.getMessage());
-        }catch(OperationNotSupportedException e){
-            throw new OperationNotSupportedException(e.getMessage());
         }
     }
 
@@ -63,15 +61,13 @@ public class Modelo {
         return h;
     }
 
-    public void borrar(Huesped huesped) throws OperationNotSupportedException{
+    public void borrar(Huesped huesped){
         try{
             huespedes.borrar(huesped);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
         }catch(NullPointerException e){
             throw new NullPointerException(e.getMessage());
-        }catch(OperationNotSupportedException e){
-            throw new OperationNotSupportedException(e.getMessage());
         }
     }
 
@@ -147,15 +143,13 @@ public class Modelo {
         return r;
     }
 
-    public void borrar(Reserva reserva) throws OperationNotSupportedException{
+    public void borrar(Reserva reserva){
         try{
             reservas.borrar(reserva);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
         }catch(NullPointerException e){
             throw new NullPointerException(e.getMessage());
-        }catch(OperationNotSupportedException e){
-            throw new OperationNotSupportedException(e.getMessage());
         }
     }
 

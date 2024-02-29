@@ -74,13 +74,13 @@ public class Reservas implements IReservas {
     /*El método borrar, si la reserva se encuentra en la colección, la borrará y desplazará los elementos hacia la izquierda
     para dejar el array compactado.
     */
-    public void borrar(Reserva reserva) throws OperationNotSupportedException {
+    public void borrar(Reserva reserva){
         try {
             if(reserva != null) {
                 if(coleccionReservas.contains(reserva)){//Si la reserva está contenida en la colección
                     coleccionReservas.remove(reserva);
                 }else {
-                    throw new OperationNotSupportedException("ERROR: No existe ninguna reserva como la indicada.");
+                    throw new IllegalArgumentException("ERROR: No existe ninguna reserva como la indicada.");
                 }
             }else{
                 throw new NullPointerException("ERROR: No se puede borrar una reserva nula.");

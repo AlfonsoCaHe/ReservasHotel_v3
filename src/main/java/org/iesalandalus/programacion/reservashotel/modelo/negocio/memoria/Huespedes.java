@@ -40,13 +40,13 @@ public class Huespedes implements IHuespedes {
     }
 
     /*Se permitirán insertar huéspedes no nulos al final de la colección sin admitir repetidos.*/
-    public void insertar(Huesped huesped) throws OperationNotSupportedException {
+    public void insertar(Huesped huesped){
         try{
             if(huesped != null) {
                 if (!coleccionHuespedes.contains(huesped)) {
                     coleccionHuespedes.add(huesped);
                 } else {
-                    throw new OperationNotSupportedException("ERROR: Ya existe un huésped con ese dni.");
+                    throw new IllegalArgumentException("ERROR: Ya existe un huésped con ese dni.");
                 }
             }else{
                 throw new NullPointerException("ERROR: No se puede insertar un huésped nulo.");
@@ -74,7 +74,7 @@ public class Huespedes implements IHuespedes {
 
     /*El método borrar, si el huésped se encuentra en la colección, lo borrará y desplazará los elementos hacia la izquierda para
     dejar el array compactado.*/
-    public void borrar(Huesped huesped) throws OperationNotSupportedException {
+    public void borrar(Huesped huesped){
         try{
             if(huesped == null){
                 throw new NullPointerException("ERROR: No se puede borrar un huésped nulo.");
@@ -82,7 +82,7 @@ public class Huespedes implements IHuespedes {
             if(coleccionHuespedes.contains(huesped)){
                 coleccionHuespedes.remove(huesped);
             }else{
-                throw new OperationNotSupportedException("ERROR: No existe ningún huésped como el indicado.");
+                throw new IllegalArgumentException("ERROR: No existe ningún huésped como el indicado.");
             }
         }catch(NullPointerException e){
             throw new NullPointerException("ERROR: No se puede borrar un huésped nulo.");

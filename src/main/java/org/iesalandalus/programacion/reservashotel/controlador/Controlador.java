@@ -38,13 +38,11 @@ public class Controlador {
         vista.terminar();
     }
 
-    public void insertar(Huesped huesped)throws OperationNotSupportedException {
+    public void insertar(Huesped huesped){
         try{
             modelo.insertar(huesped);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
-        }catch(OperationNotSupportedException e){
-            throw new OperationNotSupportedException(e.getMessage());
         }catch(NullPointerException e){
             throw new NullPointerException(e.getMessage());
         }
@@ -62,13 +60,11 @@ public class Controlador {
         return h;
     }
 
-    public void borrar(Huesped huesped) throws OperationNotSupportedException {
+    public void borrar(Huesped huesped){
         try{
             modelo.borrar(huesped);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
-        }catch(OperationNotSupportedException e){
-            throw new OperationNotSupportedException(e.getMessage());
         }catch(NullPointerException e){
             throw new NullPointerException(e.getMessage());
         }
@@ -154,13 +150,11 @@ public class Controlador {
         return r;
     }
 
-    public void borrar(Reserva reserva) throws OperationNotSupportedException {
+    public void borrar(Reserva reserva) {
         try{
             modelo.borrar(reserva);
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
-        }catch(OperationNotSupportedException e){
-            throw new OperationNotSupportedException(e.getMessage());
         }catch(NullPointerException e){
             throw new NullPointerException(e.getMessage());
         }
