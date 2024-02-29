@@ -1,11 +1,13 @@
 package org.iesalandalus.programacion.reservashotel.modelo.negocio.memoria;
 
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
+import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHuespedes;
+
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Huespedes {
+public class Huespedes implements IHuespedes {
 
     private ArrayList<Huesped> coleccionHuespedes;
 

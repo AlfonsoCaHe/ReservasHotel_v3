@@ -1,13 +1,13 @@
 package org.iesalandalus.programacion.reservashotel.modelo.negocio.memoria;
 
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
+import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHabitaciones;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Habitaciones {
+public class Habitaciones implements IHabitaciones {
 
     private ArrayList<Habitacion> coleccionHabitaciones;
 
@@ -25,10 +25,27 @@ public class Habitaciones {
 
     private ArrayList<Habitacion> copiaProfundaHabitaciones(){
         ArrayList<Habitacion> copiaHabitaciones = new ArrayList<>();
-        Iterator it = coleccionHabitaciones.iterator();
+
+        for(Habitacion h : coleccionHabitaciones){
+            switch (h.getClass().getName()){
+                case "Simple":
+                    coleccionHabitaciones.add(new Simple((Simple)h));
+                    break;
+                case "Doble":
+                    coleccionHabitaciones.add(new Doble((Doble)h));
+                    break;
+                case "Triple":
+                    coleccionHabitaciones.add(new Triple((Triple)h));
+                    break;
+                case "Suite":
+                    coleccionHabitaciones.add(new Suite((Suite)h));
+            }
+        }
+
+        /*Iterator it = coleccionHabitaciones.iterator();
         while(it.hasNext()){
             copiaHabitaciones.add(new Habitacion((Habitacion) it.next()));
-        }
+        }*/
         return copiaHabitaciones;
     }
 
@@ -39,13 +56,33 @@ public class Habitaciones {
     public ArrayList<Habitacion> get(TipoHabitacion tipoHabitacion) {
         ArrayList<Habitacion> copiaHabitaciones = new ArrayList<>();
 
-        Iterator it = coleccionHabitaciones.iterator();
+        for(Habitacion h : coleccionHabitaciones){
+            switch (h.getClass().getName()){
+                case "Simple":
+                    if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
+                        copiaHabitaciones.add(new Simple((Simple)h));
+                    break;
+                case "Doble":
+                    if(tipoHabitacion.toString().toUpperCase().equals("DOBLE"))
+                        copiaHabitaciones.add(new Doble((Doble)h));
+                    break;
+                case "Triple":
+                    if(tipoHabitacion.toString().toUpperCase().equals("TRIPLE"))
+                        copiaHabitaciones.add(new Triple((Triple)h));
+                    break;
+                case "Suite":
+                    if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
+                        copiaHabitaciones.add(new Suite((Suite)h));
+            }
+        }
+
+        /*Iterator it = coleccionHabitaciones.iterator();
 
         while(it.hasNext()){
             Habitacion habitacionAuxiliar = (Habitacion) it.next();
             if(habitacionAuxiliar.getTipoHabitacion().equals(tipoHabitacion))
                 copiaHabitaciones.add(new Habitacion(habitacionAuxiliar));
-        }
+        }*/
         return copiaHabitaciones;
     }
 

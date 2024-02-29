@@ -1,16 +1,14 @@
 package org.iesalandalus.programacion.reservashotel.modelo.negocio.memoria;
 
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
+import org.iesalandalus.programacion.reservashotel.modelo.negocio.IReservas;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Reservas {
+public class Reservas implements IReservas {
     private ArrayList<Reserva> coleccionReservas;
 
     /*Crea el constructor con parámetros que creará una lista de la capacidad indicada en el parámetro e inicializará los atributos de la clase a los valores correspondientes.*/
@@ -120,14 +118,35 @@ public class Reservas {
                 throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
             }
 
-            Iterator it = coleccionReservas.iterator();
+            for(Reserva r : coleccionReservas){
+                switch (r.getHabitacion().getClass().getName()){
+                    case "Simple":
+                        if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
+                            copiaReservas.add(r);
+                        break;
+                    case "Doble":
+                        if(tipoHabitacion.toString().toUpperCase().equals("DOBLE"))
+                            copiaReservas.add(r);
+                        break;
+                    case "Triple":
+                        if(tipoHabitacion.toString().toUpperCase().equals("TRIPLE"))
+                            copiaReservas.add(r);
+                        break;
+                    case "Suite":
+                        if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
+                            copiaReservas.add(r);
+                }
+            }
+
+
+            /*Iterator it = coleccionReservas.iterator();
 
             while(it.hasNext()) {
                 Reserva r = (Reserva) it.next();
                 if (r.getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
                     copiaReservas.add(r);
                 }
-            }
+            }*/
         }catch(NullPointerException e) {
             throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
         }
