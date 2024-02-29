@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.reservashotel.vista;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
+import javax.xml.stream.events.EntityReference;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -118,8 +119,49 @@ public class Consola {
             int puerta = Entrada.entero();
             System.out.print("\n\tIntroduzca el precio de la habitación: ");
             double precio = Entrada.realDoble();
+            System.out.println(" ");
             TipoHabitacion tipoHabitacion = leerTipoHabitacion();
-            habitacion = new Habitacion(planta, puerta, precio, tipoHabitacion);
+            int camasIndividuales;
+            int camasDobles;
+            int numBanos;
+            switch (tipoHabitacion.toString()){
+                case "SIMPLE":
+                    habitacion = new Simple(planta, puerta, precio);
+                    break;
+                case "DOBLE":
+                    System.out.println("Introduzca el número de camas individuales:");
+                    camasIndividuales = Entrada.entero();
+                    System.out.println(" ");
+                    System.out.println("Introduzca el número de camas dobles:");
+                    camasDobles = Entrada.entero();
+                    System.out.println(" ");
+                    habitacion = new Doble(planta, puerta, precio, camasIndividuales, camasDobles);
+                    break;
+                case "TRIPLE":
+                    System.out.println("Introduzca el número de camas individuales:");
+                    camasIndividuales = Entrada.entero();
+                    System.out.println(" ");
+                    System.out.println("Introduzca el número de camas dobles:");
+                    camasDobles = Entrada.entero();
+                    System.out.println(" ");
+                    System.out.println("Introduzca el número de baños:");
+                    numBanos = Entrada.entero();
+                    System.out.println(" ");
+                    habitacion = new Triple(planta, puerta, precio, numBanos, camasIndividuales, camasDobles);
+                    break;
+                case "SUITE":
+                    boolean jacuzzi = false;
+                    System.out.println("Introduzca el número de baños:");
+                    numBanos = Entrada.entero();
+                    System.out.println(" ");
+                    int opcion;
+                    do{
+                        System.out.println("¿La habitación posee jacuzzi? \n1.Sí\n2.No");
+                        opcion = Entrada.entero();
+                        System.out.println(" ");
+                    }while(opcion < 1 || opcion > 2);
+                    habitacion = new Suite(planta, puerta, precio, numBanos, jacuzzi);
+            }
         }catch (IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -130,7 +172,7 @@ public class Consola {
     devolverá una habitación con dichos datos y con el resto de datos ficticios que cumpliendo las restricciones de creación de
     una habitación. En caso contrario, deberá propagar la excepción correspondiente.
     */
-    public Habitacion leerHabitacionPorIdentificador(){
+    /*public Habitacion leerHabitacionPorIdentificador(){
         Habitacion habitacion = null;
         try{
             int planta = 0;
@@ -151,7 +193,7 @@ public class Consola {
             System.out.println("ERROR: No se puede crear una habitación con ese identificador.");
         }
         return habitacion;
-    }
+    }*/
 
     /*Crea el método leerTipoHabitacion que pedirá que elijamos un tipo de habitación y devolverá la instancia del enumerado
     TipoHabitación correspondiente.
@@ -221,11 +263,11 @@ public class Consola {
             numero_Personas = Entrada.entero();
             System.out.println(" ");
         }while(numero_Personas < 1 || numero_Personas > 4);
-        reserva = new Reserva(huesped, new Habitacion(Habitacion.MIN_NUMERO_PLANTA+1, Habitacion.MIN_NUMERO_PUERTA+1, Habitacion.MIN_PRECIO_HABITACION), regimen, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), numero_Personas);
+        reserva = new Reserva(huesped, new Suite(Habitacion.MIN_NUMERO_PLANTA+1, Habitacion.MIN_NUMERO_PUERTA+1, Habitacion.MIN_PRECIO_HABITACION, 0, false), regimen, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), numero_Personas);
         return reserva;
     }
 
-    public LocalDateTime leerFechaHora(String mensaje){
+    /*public LocalDateTime leerFechaHora(String mensaje){
         LocalDateTime fechaYHora;
         boolean valido = false;
         do{
@@ -236,5 +278,5 @@ public class Consola {
             }
         }while(!valido);
         return fechaYHora;
-    }
+    }*/
 }
