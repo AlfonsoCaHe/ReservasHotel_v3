@@ -25,6 +25,8 @@ public class Suite extends Habitacion{
     }
 
     public void setNumBanos(int numBanos) {
+        if(numBanos < MIN_NUM_BANOS || numBanos > MAX_NUM_BANOS)
+            throw new IllegalArgumentException("ERROR: El número de baños no puede ser inferior a 1 ni superior a 2");
         this.numBanos = numBanos;
     }
 
@@ -49,6 +51,6 @@ public class Suite extends Habitacion{
         }else{
             jacuzzi = "sin Jacuzzi";
         }
-        return super.toString()+"suite, capacidad="+NUM_MAXIMO_PERSONAS+" personas, " + "baños="+numBanos+", "+jacuzzi;
+        return super.toString()+"habitación suite, capacidad="+NUM_MAXIMO_PERSONAS+" personas, " + "baños="+numBanos+", "+jacuzzi;
     }
 }

@@ -49,14 +49,15 @@ public class Doble extends Habitacion{
     }
 
     private void validaNumCamas(){
-        if(numCamasIndividuales != MAX_NUM_CAMAS_INDIVIDUALES){//Si no hay dos camas individuales
-            if(numCamasDobles != MAX_NUM_CAMAS_DOBLES){//Debe haber una doble
-                throw new IllegalArgumentException("ERROR: El número de camas no es correcto.");
-            }
+        if(numCamasIndividuales < MIN_NUM_CAMAS_INDIVIDUALES || numCamasIndividuales > MAX_NUM_CAMAS_INDIVIDUALES){
+                throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación doble no puede ser inferior a 0 ni mayor que 2");
         }else{
-            if(numCamasDobles != MIN_NUM_CAMAS_DOBLES){//Hay dos camas individuales y al menos una doble
-                throw new IllegalArgumentException("ERROR: El número de camas no es correcto.");
+            if(numCamasDobles <  MIN_NUM_CAMAS_DOBLES || numCamasDobles > MAX_NUM_CAMAS_DOBLES){
+                throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación doble no puede ser inferior a 0 ni mayor que 1");
             }
+        }
+        if(numCamasIndividuales + (numCamasDobles * 2) != NUM_MAXIMO_PERSONAS){
+            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación doble tiene que ser 2 camas individuales y 0 doble o 0 camas individuales y 1 doble");
         }
     }
 
@@ -67,6 +68,6 @@ public class Doble extends Habitacion{
 
     @Override
     public String toString() {
-        return super.toString()+"doble, capacidad="+NUM_MAXIMO_PERSONAS+" personas, " + "camas individuales="+numCamasIndividuales+", camas dobles="+numCamasDobles;
+        return super.toString()+"habitación doble, capacidad="+NUM_MAXIMO_PERSONAS+" personas, " + "camas individuales="+numCamasIndividuales+", camas dobles="+numCamasDobles;
     }
 }

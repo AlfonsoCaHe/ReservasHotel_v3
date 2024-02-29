@@ -21,14 +21,21 @@ public abstract class Habitacion implements Comparable<Habitacion>{
 
     /*Crea los constructores con parámetros que harán uso de los métodos de modificación.*/
     public Habitacion(int planta, int puerta, double precio){
-        setPlanta(planta);
-        setPuerta(puerta);
-        setPrecio(precio);
-        setIdentificador();
+        try {
+            setPlanta(planta);
+            setPuerta(puerta);
+            setPrecio(precio);
+            setIdentificador();
+        }catch(NullPointerException e){
+            throw new NullPointerException("ERROR: No es posible copiar una habitación nula.");
+        }
     }
 
     /*Crea el constructor copia.*/
     public Habitacion(Habitacion habitacion){
+        if (habitacion == null){
+            throw new NullPointerException("ERROR: No es posible copiar una habitación nula.");
+        }
         try {
             this.planta = habitacion.getPlanta();
             this.puerta = habitacion.getPuerta();
@@ -152,7 +159,7 @@ public abstract class Habitacion implements Comparable<Habitacion>{
     /*Crea el método toString que devuelva la cadena que esperan los tests.*/
     @Override
     public String toString() {
-        return String.format("identificador=%s (%d-%d), precio habitación=%s, tipo habitación=", getIdentificador(), getPlanta(), getPuerta(), getPrecio());
+        return String.format("identificador=%s (%d-%d), precio habitación=%s, ", getIdentificador(), getPlanta(), getPuerta(), getPrecio());
     }
 
     @Override

@@ -28,17 +28,17 @@ public class Habitaciones implements IHabitaciones {
 
         for(Habitacion h : coleccionHabitaciones){
             switch (h.getClass().getName()){
-                case "Simple":
-                    coleccionHabitaciones.add(new Simple((Simple)h));
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
+                    copiaHabitaciones.add(new Simple((Simple)h));
                     break;
-                case "Doble":
-                    coleccionHabitaciones.add(new Doble((Doble)h));
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Doble":
+                    copiaHabitaciones.add(new Doble((Doble)h));
                     break;
-                case "Triple":
-                    coleccionHabitaciones.add(new Triple((Triple)h));
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Triple":
+                    copiaHabitaciones.add(new Triple((Triple)h));
                     break;
-                case "Suite":
-                    coleccionHabitaciones.add(new Suite((Suite)h));
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Suite":
+                    copiaHabitaciones.add(new Suite((Suite)h));
             }
         }
 

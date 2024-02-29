@@ -269,10 +269,27 @@ public class Reserva implements Comparable<Reserva>{
         if(getCheckOut() != null) {
             cadenaCheckOut = getCheckOut().format(pattern);
         }
+        String tipo = " ";
+        switch (getHabitacion().getClass().getName()){
+            case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
+                tipo = "simple";
+                break;
+            case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Doble":
+                tipo = "doble";
+                break;
+            case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Triple":
+                tipo = "triple";
+                break;
+            case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Suite":
+                tipo = "suite";
+        }
 
-        return String.format("Huesped: %s %s Habitación:%s - %s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d", getHuesped().getNombre(), getHuesped().getDni(),
-                getHabitacion().getIdentificador(),getHabitacion().getClass().getName(), cadenaFechaInicioReserva,
-                cadenaFechaFinReserva, cadenaCheckIn, cadenaCheckOut, getPrecio(), getNumeroPersonas());
+
+        /*return String.format("Huesped: %s %s Habitación:identificador=%s (%d-%d), precio habitación=%d, habitación %s, capacidad=%d personas Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s", getHuesped().getNombre(), getHuesped().getDni(),
+                getHabitacion().getIdentificador(), getHabitacion().getPlanta(), getHabitacion().getPuerta(), getHabitacion().getPrecio(),  tipo, getHabitacion().getNumeroMaximoPersonas(), cadenaFechaInicioReserva,
+                cadenaFechaFinReserva,  cadenaCheckIn, cadenaCheckOut);*/
+        return String.format("Huesped: "+getHuesped().getNombre()+" "+ getHuesped().getDni()+" Habitación:identificador="+getHabitacion().getIdentificador()+" ("+getHabitacion().getPlanta()+"-"+getHabitacion().getPuerta()+"), precio habitación="+getHabitacion().getPrecio()+", habitación "+tipo+", capacidad="+getHabitacion().getNumeroMaximoPersonas()+" personas Fecha Inicio Reserva: "+cadenaFechaInicioReserva+" Fecha Fin Reserva: "+cadenaFechaFinReserva+" Checkin: "+cadenaCheckIn+" Checkout: "+cadenaCheckOut+" Precio: %.2f Personas: "+getNumeroPersonas(), getPrecio());
+
     }
 
     @Override

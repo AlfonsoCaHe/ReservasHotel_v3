@@ -9,7 +9,8 @@ public class Simple extends Habitacion{
     }
 
     public Simple(Simple habitacionSimple){
-        super(habitacionSimple.getPlanta(), habitacionSimple.getPuerta(), habitacionSimple.getPrecio());
+        super(habitacionSimple);
+
     }
     @Override
     public int getNumeroMaximoPersonas() {
@@ -18,6 +19,6 @@ public class Simple extends Habitacion{
 
     @Override
     public String toString() {
-        return super.toString()+"simple, capacidad="+NUM_MAXIMO_PERSONAS+" personas";
+        return super.toString()+"habitación simple, capacidad="+NUM_MAXIMO_PERSONAS+" personas";
     }
 }

@@ -26,13 +26,13 @@ public class Vista {
         System.out.println("************************************************************\n");
         int opcion = 0;
         do {
-            try {
+            /*try {
                 opcion = Consola.elegirOpcion();
                 ejecutarOpcion(opcion);
                 System.out.println("\n************************************************************\n");
             }catch(OperationNotSupportedException | IllegalArgumentException | NullPointerException e){
                 System.out.println("ERROR: Operación no permitida. "+e.getMessage());
-            }
+            }*/
         } while (opcion != Opcion.values().length);
     }
 
@@ -41,7 +41,7 @@ public class Vista {
         System.out.println("************************************************************");
     }
 
-    private void ejecutarOpcion(int opcion) throws OperationNotSupportedException {
+    /*private void ejecutarOpcion(int opcion) throws OperationNotSupportedException {
         try{
             switch(opcion){
                 case 1:
@@ -132,7 +132,7 @@ public class Vista {
                 puede haber realizado varias reservas para el mismo d?a. Adem?s, en caso de intentar hacer checkin de una
                 reserva no existente en el d?a indicado para el hu?sped, la aplicaci?n deber? informar con alg?n mensaje de
                 lo sucedido.*/
-                    System.out.println("\n************************************************************");
+       /*             System.out.println("\n************************************************************");
                     System.out.println("Realizar check in");
                     System.out.println("************************************************************\n");
 
@@ -223,7 +223,7 @@ public class Vista {
         }catch(IllegalArgumentException | OperationNotSupportedException | NullPointerException e){
             System.out.println(e.getMessage());
         }
-    }
+    }*/
 
     /*Crea el método insertarHuesped que nos pedir? los datos de un hu?sped, haciendo uso de la clase Consola, y lo insertar? en
     la colecci?n correspondiente si es posible o informar? del problema en caso contrario.*/
@@ -341,7 +341,7 @@ public class Vista {
                 System.out.print("Introduzca el número de habitación: ");
                 int puertaBuscada = Entrada.entero();
                 System.out.println(" ");
-                Habitacion habitacion = new Habitacion(plantaBuscada, puertaBuscada, Habitacion.MIN_PRECIO_HABITACION);
+                Habitacion habitacion = new Simple(plantaBuscada, puertaBuscada, Habitacion.MIN_PRECIO_HABITACION);
                 boolean encontrado = false;
                 ArrayList<Habitacion> habitacionesBusqueda = controlador.getHabitaciones();
 
@@ -374,7 +374,7 @@ public class Vista {
                 System.out.print("Introduzca el número de habitación: ");
                 int puertaBuscada = Entrada.entero();
                 System.out.println(" ");
-                Habitacion habitacion = new Habitacion(plantaBuscada, puertaBuscada, Habitacion.MIN_PRECIO_HABITACION);
+                Habitacion habitacion = new Simple(plantaBuscada, puertaBuscada, Habitacion.MIN_PRECIO_HABITACION);
 
                 if (controlador.getHabitaciones().contains(habitacion)) {
                     habitacion = controlador.buscar(habitacion);
@@ -439,6 +439,30 @@ public class Vista {
         }
     }
 
+
+
+
+
+
+
+
+
+
+    public void mostrarReservasHuesped(){
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     /*Crea el método listarReservas que est? sobrecargado, mostrando todas las reservas almacenadas (si es que hay) del hu?sped,
     del tipo de habitaci?n o de la fecha indicada como par?metro. Si no hay, nos informar? de que no hay reservas.*/
     private void listarReservas(Huesped huesped){
@@ -467,30 +491,27 @@ public class Vista {
         }
     }
 
-    private void listarReservas(TipoHabitacion tipoHabitacion){
-        ArrayList<Reserva> reservasTipoHabitacion = controlador.getReservas(tipoHabitacion);
-        Collections.sort(reservasTipoHabitacion, new Comparator<Reserva>() {
-            @Override
-            public int compare(Reserva o1, Reserva o2) {
-                int valor = 0;//Definimos como valor por defecto que las reservas sean iguales
-                if(o1.getFechaInicioReserva().isBefore(o2.getFechaInicioReserva())){//Si la fecha de inicio es anterior va despu?s
-                    valor = 1;
-                }else{
-                    if(o1.getFechaInicioReserva().isAfter(o2.getFechaInicioReserva())){//Si la fecha de inicio es posterior va primero
-                        valor = -1;
-                    }else{//Si ambas fechas de inicio son la misma, pasamos a ordenar por nombre del huesped, que ya se encuentra implementado en Huesped
-                        valor = o1.getHuesped().compareTo(o2.getHuesped());
-                    }
-                }
-                return valor;
-            }
-        });
-        Iterator it = reservasTipoHabitacion.iterator();
-        while(it.hasNext()){
-            Reserva r = (Reserva) it.next();
-            System.out.println(r.toString());
-        }
+
+
+
+
+
+
+
+
+    public void mostrarReservasTipoHabitacion(){
+
     }
+
+
+
+
+
+
+
+
+
+
 
     private void listarReservas(LocalDate fecha){
         ArrayList<Reserva> reservasFecha = controlador.getReservas();
@@ -508,7 +529,7 @@ public class Vista {
         }
     }
 
-    /*Crea el m?todo getReservasAnulables que de la colecci?n de reservas recibida como par?metro, devolver? aquellas que sean
+    /*Crea el método getReservasAnulables que de la colecci?n de reservas recibida como par?metro, devolver? aquellas que sean
     anulables, es decir, cuya fecha de inicio de la reserva a?n no haya llegado.*/
     private ArrayList<Reserva> getReservasAnulables(ArrayList<Reserva> reservasAAnular){
         ArrayList<Reserva> reserva = new ArrayList<>();
@@ -530,7 +551,7 @@ public class Vista {
         return reserva;
     }
 
-    /*Crea el m?todo anularReserva que pedir? el dni del hu?sped del que se desea anular una reserva (haciendo uso de la clase
+    /*Crea el método anularReserva que pedir? el dni del hu?sped del que se desea anular una reserva (haciendo uso de la clase
     Consola), obteniendo de todas las reservas de dicho hu?sped aquellas que sean anulables. En el caso de que no tenga ninguna
     anulable deber? de informarse de dicha circunstancia. Si solo tiene una reserva anulable deber? confirmarse de que realmente
     se quiere anular. Y por ?ltimo, en el caso de que el hu?sped tenga m?s de una reserva anulable, deber?n ser listadas
@@ -580,7 +601,7 @@ public class Vista {
         }
     }
 
-    /*Crea el m?todo mostrarReservas que mostrar? todas las reservas almacenadas si es que hay o si no, nos informar? de que no
+    /*Crea el método mostrarReservas que mostrar? todas las reservas almacenadas si es que hay o si no, nos informar? de que no
     hay reservas. */
     private void mostrarReservas(){
         int opcion = 0;
@@ -638,7 +659,7 @@ public class Vista {
         }
     }
 
-    /*Crea el m?todo consultarDisponibilidad que devuelve una habitaci?n del tipo indicado por par?metro y que est? disponible
+    /*Crea el método consultarDisponibilidad que devuelve una habitaci?n del tipo indicado por par?metro y que est? disponible
     entre las fechas de inicio y fin de la reserva, tambi?n indicados por par?metro.*/
     private Habitacion consultarDisponibilidad(TipoHabitacion tipoHabitacion, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
         Habitacion habitacion = null;
@@ -683,12 +704,37 @@ public class Vista {
         return habitacion;
     }
 
-    /*Crea el m?todo getNumElementosNoNulos que devolver? el n?mero de elementos del array que no son nulos.*/
-    private int getNumElementosNoNulos(ArrayList<Reserva> reservas){
+    private void listarReservas(TipoHabitacion tipoHabitacion){
+        ArrayList<Reserva> reservasTipoHabitacion = controlador.getReservas(tipoHabitacion);
+        Collections.sort(reservasTipoHabitacion, new Comparator<Reserva>() {
+            @Override
+            public int compare(Reserva o1, Reserva o2) {
+                int valor = 0;//Definimos como valor por defecto que las reservas sean iguales
+                if(o1.getFechaInicioReserva().isBefore(o2.getFechaInicioReserva())){//Si la fecha de inicio es anterior va despu?s
+                    valor = 1;
+                }else{
+                    if(o1.getFechaInicioReserva().isAfter(o2.getFechaInicioReserva())){//Si la fecha de inicio es posterior va primero
+                        valor = -1;
+                    }else{//Si ambas fechas de inicio son la misma, pasamos a ordenar por nombre del huesped, que ya se encuentra implementado en Huesped
+                        valor = o1.getHuesped().compareTo(o2.getHuesped());
+                    }
+                }
+                return valor;
+            }
+        });
+        Iterator it = reservasTipoHabitacion.iterator();
+        while(it.hasNext()){
+            Reserva r = (Reserva) it.next();
+            System.out.println(r.toString());
+        }
+    }
+
+    /*Crea el método getNumElementosNoNulos que devolver? el n?mero de elementos del array que no son nulos.*/
+    /*private int getNumElementosNoNulos(ArrayList<Reserva> reservas){
         int contador = 0;
         for(int i = 0; i < reservas.size() && reservas.get(i) != null; i++){
             contador--;//Cada vez que hay un elemento no nulo, sumamos al total de elementos
         }
         return contador;//Si ning?n elemento es nulo devolver? el tama?o total. Si est? vac?o devolver? 0
-    }
+    }*/
 }

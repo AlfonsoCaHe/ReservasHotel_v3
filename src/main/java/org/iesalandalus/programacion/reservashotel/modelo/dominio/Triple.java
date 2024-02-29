@@ -42,6 +42,8 @@ public class Triple extends Habitacion{
     }
 
     public void setNumBanos(int numBanos) {
+        if(numBanos < MIN_NUM_BANOS || numBanos > MAX_NUM_BANOS)
+            throw new IllegalArgumentException("ERROR: El número de baños no puede ser inferior a 1 ni superior a 2");
         this.numBanos = numBanos;
     }
 
@@ -62,14 +64,13 @@ public class Triple extends Habitacion{
     }
 
     private void validaNumCamas(){
-        if(numCamasDobles == MAX_NUM_CAMAS_DOBLES){
-            if(numCamasIndividuales != MIN_NUM_CAMAS_INDIVIDUALES){
-                throw new IllegalArgumentException("ERROR: El número de camas no es correcto.");
-            }
-        }else{
-            if(numCamasIndividuales != MAX_NUM_CAMAS_INDIVIDUALES){
-                throw new IllegalArgumentException("ERROR: El número de camas no es correcto.");
-            }
+
+        if(numCamasIndividuales < MIN_NUM_CAMAS_INDIVIDUALES || numCamasIndividuales > MAX_NUM_CAMAS_INDIVIDUALES)
+            throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación triple no puede ser inferior a 1 ni mayor que 3");
+        if(numCamasDobles < MIN_NUM_CAMAS_DOBLES || numCamasDobles > MAX_NUM_CAMAS_DOBLES)
+            throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación triple no puede ser inferior a 0 ni mayor que 1");
+        if(numCamasIndividuales + (numCamasDobles * 2) != NUM_MAXIMO_PERSONAS){
+            throw new IllegalArgumentException("ERROR: La distribución de camas en una habitación triple tiene que ser 3 camas individuales y 0 doble o 1 cama individual y 1 doble");
         }
     }
 
@@ -80,6 +81,6 @@ public class Triple extends Habitacion{
 
     @Override
     public String toString() {
-        return super.toString()+"triple, capacidad="+NUM_MAXIMO_PERSONAS+" personas, " + "baños="+numBanos+", camas individuales="+numCamasIndividuales+", camas dobles="+numCamasDobles;
+        return super.toString()+"habitación triple, capacidad="+NUM_MAXIMO_PERSONAS+" personas, " + "baños="+numBanos+", camas individuales="+numCamasIndividuales+", camas dobles="+numCamasDobles;
     }
 }

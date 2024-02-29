@@ -96,7 +96,7 @@ public class Reservas implements IReservas {
     */
     public ArrayList<Reserva> getReservas(Huesped huesped) {
         if (huesped == null) {
-            throw new NullPointerException("ERROR: No se pueden buscar reservas de un huesped nulo.");
+            throw new NullPointerException("ERROR: No se pueden buscar reservas de un huésped nulo.");
         }
 
         ArrayList<Reserva> copiaReservas = new ArrayList<>();
@@ -120,19 +120,19 @@ public class Reservas implements IReservas {
 
             for(Reserva r : coleccionReservas){
                 switch (r.getHabitacion().getClass().getName()){
-                    case "Simple":
+                    case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
                         if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
                             copiaReservas.add(r);
                         break;
-                    case "Doble":
+                    case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Doble":
                         if(tipoHabitacion.toString().toUpperCase().equals("DOBLE"))
                             copiaReservas.add(r);
                         break;
-                    case "Triple":
+                    case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Triple":
                         if(tipoHabitacion.toString().toUpperCase().equals("TRIPLE"))
                             copiaReservas.add(r);
                         break;
-                    case "Suite":
+                    case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Suite":
                         if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
                             copiaReservas.add(r);
                 }
