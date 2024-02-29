@@ -76,7 +76,7 @@ public class Reserva implements Comparable<Reserva>{
     }
 
     public Habitacion getHabitacion() {
-        return habitacion;
+        return this.habitacion;
     }
 
     public Regimen getRegimen() {
@@ -124,7 +124,7 @@ public class Reserva implements Comparable<Reserva>{
             if(habitacion != null) {
                 this.habitacion = habitacion;
             }else{
-                throw new NullPointerException("ERROR: La habitación de una reserva no puede ser nua.");
+                throw new NullPointerException("ERROR: La habitación de una reserva no puede ser nula.");
             }
         }catch(NullPointerException e){
             throw new NullPointerException("ERROR: La habitación de una reserva no puede ser nula.");
@@ -230,8 +230,8 @@ public class Reserva implements Comparable<Reserva>{
     /*El n?mero de personas que se van a alojar en la habitaci?n no puede superar al n?mero m?ximo de personas que, por el tipo de habitaci?n reservada, se permiten alojar.*/
     public void setNumeroPersonas(int numeroPersonas) {
         try{
-            if(numeroPersonas <= habitacion.getTipoHabitacion().getNumeroMaximoPersonas()){
-                if(numeroPersonas > 0) {//El n?mero de personas de una habitaci?n no puede exceder del m?ximo ni ser inferior a 1
+            if(numeroPersonas <= habitacion.getNumeroMaximoPersonas()){
+                if(numeroPersonas > 0) {//El n?mero de personas de una habitación no puede exceder del máximo ni ser inferior a 1
                     this.numeroPersonas = numeroPersonas;
                 }else{
                     throw new IllegalArgumentException("ERROR: El número de personas de una reserva no puede ser menor o igual a 0.");
@@ -271,7 +271,7 @@ public class Reserva implements Comparable<Reserva>{
         }
 
         return String.format("Huesped: %s %s Habitación:%s - %s Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s Precio: %.2f Personas: %d", getHuesped().getNombre(), getHuesped().getDni(),
-                getHabitacion().getIdentificador(),getHabitacion().getTipoHabitacion(), cadenaFechaInicioReserva,
+                getHabitacion().getIdentificador(),getHabitacion().getClass().getName(), cadenaFechaInicioReserva,
                 cadenaFechaFinReserva, cadenaCheckIn, cadenaCheckOut, getPrecio(), getNumeroPersonas());
     }
 
