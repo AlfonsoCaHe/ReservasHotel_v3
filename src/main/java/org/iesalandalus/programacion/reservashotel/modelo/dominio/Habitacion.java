@@ -1,6 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
-public class Habitacion implements Comparable<Habitacion>{
+public abstract class Habitacion implements Comparable<Habitacion>{
     /* Además, debes crear las constantes indicadas en el diagrama de clases y que luego utilizarás en los métodos de modificación.
     Los métodos de modificación lanzarán las excepciones adecuadas en caso de que el valor que se pretenda asignar al atributo no
     sea adecuado.
@@ -14,27 +14,17 @@ public class Habitacion implements Comparable<Habitacion>{
     public static int MAX_NUMERO_PUERTA = 15;
     public static int MIN_NUMERO_PLANTA = 0;
     public static int MAX_NUMERO_PLANTA = 3;
-    private String identificador;
-    private int planta;
-    private int puerta;
-    private double precio;
-    private TipoHabitacion tipoHabitacion;
+    protected String identificador;
+    protected int planta;
+    protected int puerta;
+    protected double precio;
 
     /*Crea los constructores con parámetros que harán uso de los métodos de modificación.*/
-    public Habitacion(int planta, int puerta, double precio, TipoHabitacion tipoHabitacion){
-        setPlanta(planta);
-        setPuerta(puerta);
-        setPrecio(precio);
-        setTipoHabitacion(tipoHabitacion);
-        setIdentificador();
-    }
-
     public Habitacion(int planta, int puerta, double precio){
         setPlanta(planta);
         setPuerta(puerta);
         setPrecio(precio);
         setIdentificador();
-        this.tipoHabitacion = TipoHabitacion.SUITE;//Valor por defecto para el tipo de habitación.
     }
 
     /*Crea el constructor copia.*/
@@ -43,12 +33,13 @@ public class Habitacion implements Comparable<Habitacion>{
             this.planta = habitacion.getPlanta();
             this.puerta = habitacion.getPuerta();
             this.precio = habitacion.getPrecio();
-            this.tipoHabitacion = habitacion.getTipoHabitacion();
             this.identificador = habitacion.getIdentificador();
         }catch(NullPointerException e){
             throw new NullPointerException("ERROR: No es posible copiar una habitación nula.");
         }
     }
+
+    public abstract int getNumeroMaximoPersonas();
 
     /*Crea los métodos de acceso y modificación de cada atributo con la visibilidad adecuada, teniendo en cuenta que el identificador
     de una habitación será el número de planta seguido del número de puerta.
@@ -57,11 +48,11 @@ public class Habitacion implements Comparable<Habitacion>{
         return identificador;
     }
 
-    private void setIdentificador(){
+    protected void setIdentificador(){
         this.identificador = "" + this.planta + this.puerta;
     }
 
-    private void setIdentificador(String identificador){
+    protected void setIdentificador(String identificador){
         if(identificador.isEmpty()){
             throw new IllegalArgumentException("ERROR: El indentificador no puede ser vacío.");
         }
@@ -72,7 +63,7 @@ public class Habitacion implements Comparable<Habitacion>{
         return planta;
     }
 
-    private void setPlanta(int planta){
+    protected void setPlanta(int planta){
         Integer numero = Integer.parseInt(""+planta);//Comprobamos que el int planta no sea null
         if(numero == null){
             throw new NullPointerException("ERROR: El número de la planta no puede ser nulo");
@@ -93,7 +84,7 @@ public class Habitacion implements Comparable<Habitacion>{
         return puerta;
     }
 
-    private void setPuerta(int puerta){
+    protected void setPuerta(int puerta){
         Integer numero = Integer.parseInt("" + puerta);//Comprobamos que el int puerta no sea null
         if (numero == null) {
             throw new NullPointerException("ERROR: El número de la puerta no puede ser nulo");
@@ -113,7 +104,7 @@ public class Habitacion implements Comparable<Habitacion>{
         return this.precio;
     }
 
-    public void setPrecio(double precio) {
+    protected void setPrecio(double precio) {
         Double numero = Double.parseDouble("" + precio);//Comprobamos que el double precio no sea null
         if (numero == null) {
             throw new NullPointerException("ERROR: El precio de la habitación no puede ser nulo");
@@ -129,16 +120,12 @@ public class Habitacion implements Comparable<Habitacion>{
         }
     }
 
-    public TipoHabitacion getTipoHabitacion() {
-        return tipoHabitacion;
-    }
 
-    public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
+    /*public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
         try{
             boolean valido = false;
             for(TipoHabitacion aux : TipoHabitacion.values()) {
                 if(tipoHabitacion.equals(aux)) {
-                    this.tipoHabitacion = tipoHabitacion;
                     valido = true;
                 }
             }
@@ -148,7 +135,7 @@ public class Habitacion implements Comparable<Habitacion>{
         }catch(NullPointerException e){
             throw new NullPointerException("ERROR: No se puede establecer un tipo de habitación nula.");
         }
-    }
+    }*/
 
     /*Una habitación será igual a otra si su identificador es el mismo. Basándote en ello crea los métodos equals y hashCode.*/
     @Override
@@ -165,7 +152,7 @@ public class Habitacion implements Comparable<Habitacion>{
     /*Crea el método toString que devuelva la cadena que esperan los tests.*/
     @Override
     public String toString() {
-        return String.format("identificador=%s (%d-%d), precio habitación=%s, tipo habitación=%s", getIdentificador(), getPlanta(), getPuerta(), getPrecio(), getTipoHabitacion());
+        return String.format("identificador=%s (%d-%d), precio habitación=%s, tipo habitación=", getIdentificador(), getPlanta(), getPuerta(), getPrecio());
     }
 
     @Override

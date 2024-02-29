@@ -10,7 +10,6 @@ public enum TipoHabitacion {
 
     private TipoHabitacion(String cadenaAMostrar){
         this.cadenaAMostrar = cadenaAMostrar;
-        this.numeroMaximoPersonas = numeroMaximoPersonas;
     }
 
     public String toString(){
