@@ -13,8 +13,10 @@ import java.util.*;
 public class Vista {
     private Controlador controlador;
     public void setControlador(Controlador controlador){
-        if(controlador != null)
+        if(controlador != null){
             this.controlador = controlador;
+            Opcion.setVista(this);
+        }
         else{
             throw new NullPointerException("ERROR: El controlador no puede ser nulo.");
         }
@@ -24,16 +26,17 @@ public class Vista {
         System.out.println("************************************************************");
         System.out.println("Bienvenido al sistema de gestión de nuestra cadena hotelera.");
         System.out.println("************************************************************\n");
-        int opcion = 0;
+        Opcion opcion = Opcion.SALIR;
         do {
             try {
                 opcion = Consola.elegirOpcion();
                 //ejecutarOpcion(opcion);
+                opcion.ejecutar();
                 System.out.println("\n************************************************************\n");
             }catch(IllegalArgumentException | NullPointerException e){
                 System.out.println("ERROR: Operación no permitida. "+e.getMessage());
             }
-        } while (opcion != Opcion.values().length);
+        } while (!opcion.toString().equals("0.- Salir"));
     }
 
     public void terminar(){
@@ -47,7 +50,7 @@ public class Vista {
             System.out.println("Realizar check in");
             System.out.println("************************************************************\n");
 
-            System.out.print("Introduzca el dni del huesped: ");//Buscamos el huesped
+            System.out.print("Introduzca el dni del huésped: ");//Buscamos el huesped
             String cadena = Entrada.cadena();
             Huesped huespedReserva = Consola.leerClientePorDni(cadena);//Obtenemos la informaci?n del huesped
             System.out.println(" ");
@@ -78,12 +81,12 @@ public class Vista {
                 }
 
                 if (!checkValido) {
-                    System.out.println("No se ha podido realizar el check in. El hu?sped no tiene reserva la fecha dada.");
+                    System.out.println("\nNo se ha podido realizar el check in. El huésped no tiene reserva la fecha dada.");
                 } else {
-                    System.out.println("Check In realizado correctamente.");
+                    System.out.println("\nCheck In realizado correctamente.");
                 }
             } else {
-                System.out.println("No existe un huésped con ese dni.");
+                System.out.println("\nNo existe un huésped con ese dni.");
             }
         }catch(IllegalArgumentException | NullPointerException e){
             System.out.println(e.getMessage());
@@ -127,12 +130,12 @@ public class Vista {
                 }
 
                 if (!checkValido) {
-                    System.out.println("No se ha podido realizar el check in. El hu?sped no tiene reserva la fecha dada.");
+                    System.out.println("\nNo se ha podido realizar el check in. El hu?sped no tiene reserva la fecha dada.");
                 } else {
-                    System.out.println("Check Out realizado correctamente.");
+                    System.out.println("\nCheck Out realizado correctamente.");
                 }
             } else {
-                System.out.println("No existe un hu?sped con ese dni.");
+                System.out.println("\nNo existe un hu?sped con ese dni.");
             }
         }catch(IllegalArgumentException | NullPointerException e){
                 System.out.println(e.getMessage());
@@ -147,6 +150,8 @@ public class Vista {
             huesped = Consola.leerHuesped();
             controlador.insertar(huesped);
         }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }catch(OperationNotSupportedException e){
             System.out.println(e.getMessage());
         }
     }
@@ -211,6 +216,8 @@ public class Vista {
             }
         }catch(IllegalArgumentException e){
             throw new IllegalArgumentException(e.getMessage());
+        }catch(OperationNotSupportedException e){
+            System.out.println("ERROR: El huesped no ha sido borrado correctamente");
         }
     }
 
@@ -345,6 +352,7 @@ public class Vista {
                 Reserva r = Consola.leerReserva();
                 Huesped huespedReserva = controlador.getHuespedes().get(controlador.getHuespedes().indexOf(r.getHuesped()));
                 controlador.insertar(new Reserva(huespedReserva, habitacionReserva, r.getRegimen(), fi, ff, r.getNumeroPersonas()));
+                System.out.println("\n Habitación insertada correctamente.");
             }else{
                 System.out.println("No hay ninguna habitación "+t.toString()+" disponible en esas fechas.");
             }
@@ -447,47 +455,52 @@ public class Vista {
     se quiere anular. Y por ?ltimo, en el caso de que el hu?sped tenga m?s de una reserva anulable, deber?n ser listadas
     precedidas por un n?mero para que el usuario elija la reserva que desea anular. */
     public void anularReserva() {
-        System.out.print("Introduzca el dni del cliente: ");
-        Huesped huesped = controlador.buscar(Consola.leerClientePorDni(Entrada.cadena()));
-        System.out.println(" ");
+        try {
+            System.out.print("Introduzca el dni del cliente: ");
+            Huesped huesped = controlador.buscar(Consola.leerClientePorDni(Entrada.cadena()));
+            System.out.println(" ");
 
-        ArrayList<Reserva> reservaHuesped = getReservasAnulables(controlador.getReservas(huesped));
-        if(!reservaHuesped.isEmpty()){
-            int opcion;
-            if(reservaHuesped.size() == 1){
-                System.out.println("El hu?sped solo dispone de 1 reserva anulable: ");
-                System.out.println(reservaHuesped.get(0).toString());
-                System.out.println("?Desea realmente anularla?\n\t1. S?\n\t2. No");
-                do{
-                    opcion = Entrada.entero();
-                }while(opcion < 1 || opcion > 2);
-                if(opcion == 1){
-                    controlador.borrar(reservaHuesped.get(0));
-                    System.out.println("Reserva anulada correctamente.");
-                }else{
-                    System.out.println("No se ha borrado ninguna reserva.");
+            ArrayList<Reserva> reservaHuesped = getReservasAnulables(controlador.getReservas(huesped));
+            if (!reservaHuesped.isEmpty()) {
+                int opcion;
+                if (reservaHuesped.size() == 1) {
+                    System.out.println("El huésped solo dispone de 1 reserva anulable: ");
+                    System.out.println(reservaHuesped.get(0).toString());
+                    System.out.println("¿Desea realmente anularla?\n\t1. S?\n\t2. No");
+                    do {
+                        opcion = Entrada.entero();
+                    } while (opcion < 1 || opcion > 2);
+                    if (opcion == 1) {
+                        controlador.borrar(reservaHuesped.get(0));
+                        System.out.println("\nReserva anulada correctamente.");
+                    } else {
+                        System.out.println("\nNo se ha borrado ninguna reserva.");
+                    }
+                } else {
+                    Iterator it = reservaHuesped.iterator();
+                    int contador = 0;//Iniciamos un contador para las diferentes opciones
+                    System.out.println("0. Cancelar");
+                    while (it.hasNext()) {
+                        Reserva r = (Reserva) it.next();
+                        System.out.println((contador + 1) + ". " + r.toString());
+                        contador++;
+                    }
+                    do {
+                        System.out.print("\nSeleccione una reserva para anularla o escoja 0 para cancelar: ");
+                        opcion = Entrada.entero();
+                    } while (opcion < 0 || opcion > reservaHuesped.size());
+                    if (opcion != 0) {
+                        controlador.borrar(reservaHuesped.get(opcion - 1));//Borramos el contenido de (opcion-1) que ser? el elemento escogido
+                        System.out.println("\nReserva anulada correctamente.");
+                    } else {
+                        System.out.println("\nNo se ha borrado ninguna reserva.");
+                    }
                 }
-            }else{
-                Iterator it = reservaHuesped.iterator();
-                int contador = 0;//Iniciamos un contador para las diferentes opciones
-                while(it.hasNext()){
-                    Reserva r = (Reserva) it.next();
-                    System.out.println(""+(contador+1)+". "+r.toString());
-                    contador++;
-                }
-                do{
-                    System.out.print("\nSeleccione una reserva para anularla o escoja 0 para cancelar: ");
-                    opcion = Entrada.entero();
-                }while(opcion < 0 || opcion > reservaHuesped.size());
-                if(opcion != 0){
-                    controlador.borrar(reservaHuesped.get(opcion - 1));//Borramos el contenido de (opcion-1) que ser? el elemento escogido
-                    System.out.println("Reserva anulada correctamente.");
-                }else{
-                    System.out.println("No se ha borrado ninguna reserva.");
-                }
+            } else {
+                System.out.println("\nNo existen reservas anulables para el huesped.");
             }
-        }else{
-            System.out.println("No existen reservas anulables para el huesped.");
+        }catch(OperationNotSupportedException e){
+            System.out.println("ERROR: La reserva no ha sido anulada correctamente.");
         }
     }
 
@@ -518,7 +531,11 @@ public class Vista {
             System.out.println("Introduzca la fecha de fin de reserva:");
             LocalDate fechaFinReserva = Consola.leerFecha();
             Habitacion habitacion = consultarDisponibilidad(tipoHabitacion, fechaInicioReserva, fechaFinReserva);
-            System.out.println(habitacion.toString());
+            if(habitacion != null) {
+                System.out.println(habitacion.toString());
+            }else{
+                System.out.println("No hay ninguna habitación libre");
+            }
         }catch(IllegalArgumentException | NullPointerException e){
             System.out.println(e.getMessage());
         }

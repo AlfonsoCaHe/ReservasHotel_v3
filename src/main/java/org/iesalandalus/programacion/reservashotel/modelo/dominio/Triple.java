@@ -2,7 +2,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 public class Triple extends Habitacion{
 
-    private static int NUM_MAXIMO_PERSONAS = 3;
+    private static final int NUM_MAXIMO_PERSONAS = 3;
     static final int MIN_NUM_BANOS = 1;
     static final int MAX_NUM_BANOS = 2;
     static final int MIN_NUM_CAMAS_INDIVIDUALES = 1;

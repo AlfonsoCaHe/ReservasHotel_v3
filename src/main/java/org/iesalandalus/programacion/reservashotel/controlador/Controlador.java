@@ -38,7 +38,7 @@ public class Controlador {
         vista.terminar();
     }
 
-    public void insertar(Huesped huesped){
+    public void insertar(Huesped huesped)throws OperationNotSupportedException{
         try{
             modelo.insertar(huesped);
         }catch(IllegalArgumentException e){
@@ -60,7 +60,7 @@ public class Controlador {
         return h;
     }
 
-    public void borrar(Huesped huesped){
+    public void borrar(Huesped huesped)throws OperationNotSupportedException{
         try{
             modelo.borrar(huesped);
         }catch(IllegalArgumentException e){
@@ -150,7 +150,7 @@ public class Controlador {
         return r;
     }
 
-    public void borrar(Reserva reserva) {
+    public void borrar(Reserva reserva) throws OperationNotSupportedException {
         try{
             modelo.borrar(reserva);
         }catch(IllegalArgumentException e){

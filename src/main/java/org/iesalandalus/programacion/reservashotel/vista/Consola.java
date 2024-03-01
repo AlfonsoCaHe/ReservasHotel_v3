@@ -3,10 +3,8 @@ package org.iesalandalus.programacion.reservashotel.vista;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
-import javax.xml.stream.events.EntityReference;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Consola {
@@ -26,14 +24,64 @@ public class Consola {
     }
 
     /*Crea el método elegirOpcion que pedirá que elijamos la opción y devolverá la instancia del enumerado Opcion correspondiente.*/
-    public static int elegirOpcion() {
-        int opcionElegida = 0;//Inicializamos a una opción no válida.
+    public static Opcion elegirOpcion() {
+        int opcionElegida = -1;//Inicializamos a una opción no válida.
+        Opcion opcion = Opcion.SALIR;
         do{
             mostrarMenu();
-            System.out.print("\nElija una opción: (1-" + (Opcion.values().length) + ") ");
+            System.out.print("\nElija una opción: (0-" + (Opcion.values().length-1) + ") ");
             opcionElegida = Entrada.entero();
-        }while((opcionElegida < 1) || (opcionElegida > Opcion.values().length));//Las opciones van del 1 a la última opción
-        return opcionElegida;
+        }while((opcionElegida < 0) || (opcionElegida > Opcion.values().length-1));//Las opciones van del 0 a la última opción
+        switch (opcionElegida){
+            case 1:
+                opcion = Opcion.INSERTAR_HUESPED;
+                break;
+            case 2:
+                opcion = Opcion.BUSCAR_HUESPED;
+                break;
+            case 3:
+                opcion = Opcion.BORRAR_HUESPED;
+                break;
+            case 4:
+                opcion = Opcion.MOSTRAR_HUESPEDES;
+                break;
+            case 5:
+                opcion = Opcion.INSERTAR_HABITACION;
+                break;
+            case 6:
+                opcion = Opcion.BUSCAR_HABITACION;
+                break;
+            case 7:
+                opcion = Opcion.BORRAR_HABITACION;
+                break;
+            case 8:
+                opcion = Opcion.MOSTRAR_HABITACIONES;
+                break;
+            case 9:
+                opcion = Opcion.INSERTAR_RESERVA;
+                break;
+            case 10:
+                opcion = Opcion.ANULAR_RESERVA;
+                break;
+            case 11:
+                opcion = Opcion.MOSTRAR_RESERVAS;
+                break;
+            case 12:
+                opcion = Opcion.LISTAR_RESERVAS_HUESPED;
+                break;
+            case 13:
+                opcion = Opcion.LISTAR_RESERVAS_TIPO_HABITACION;
+                break;
+            case 14:
+                opcion = Opcion.CONSULTAR_DISPONIBILIDAD;
+                break;
+            case 15:
+                opcion = Opcion.REALIZAR_CHECKIN;
+                break;
+            case 16:
+                opcion = Opcion.REALIZAR_CHECKOUT;
+        }
+        return opcion;
     }
 
     /*Crea el método leerHuesped que nos pedirá los datos correspondientes a un huésped y devolverá un objeto instancia de dicha
@@ -168,33 +216,6 @@ public class Consola {
         return habitacion;
     }
 
-    /*Crea el método leerHabitacionPorIdentificador que nos pedirá el número de planta y el número de puerta de una habitación y
-    devolverá una habitación con dichos datos y con el resto de datos ficticios que cumpliendo las restricciones de creación de
-    una habitación. En caso contrario, deberá propagar la excepción correspondiente.
-    */
-    /*public Habitacion leerHabitacionPorIdentificador(){
-        Habitacion habitacion = null;
-        try{
-            int planta = 0;
-            int puerta = 0;
-            do{
-                System.out.print("Introduzca el número de planta: ");
-                planta = Entrada.entero();
-                System.out.println(" ");
-            }while(planta < 1 || planta > 3);
-            do{
-                System.out.print("Introduzca el número de puerta: ");
-                puerta = Entrada.entero();
-                System.out.println(" ");
-            }while(puerta < 1 || puerta > 15);
-
-            habitacion = new Habitacion(planta, puerta, 50, TipoHabitacion.SIMPLE);
-        }catch (IllegalArgumentException e){
-            System.out.println("ERROR: No se puede crear una habitación con ese identificador.");
-        }
-        return habitacion;
-    }*/
-
     /*Crea el método leerTipoHabitacion que pedirá que elijamos un tipo de habitación y devolverá la instancia del enumerado
     TipoHabitación correspondiente.
     */
@@ -263,20 +284,7 @@ public class Consola {
             numero_Personas = Entrada.entero();
             System.out.println(" ");
         }while(numero_Personas < 1 || numero_Personas > 4);
-        reserva = new Reserva(huesped, new Suite(Habitacion.MIN_NUMERO_PLANTA+1, Habitacion.MIN_NUMERO_PUERTA+1, Habitacion.MIN_PRECIO_HABITACION, 0, false), regimen, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), numero_Personas);
+        reserva = new Reserva(huesped, new Suite(Habitacion.MIN_NUMERO_PLANTA+1, Habitacion.MIN_NUMERO_PUERTA+1, Habitacion.MIN_PRECIO_HABITACION, 1, false), regimen, LocalDate.now().plusDays(1), LocalDate.now().plusDays(2), numero_Personas);
         return reserva;
     }
-
-    /*public LocalDateTime leerFechaHora(String mensaje){
-        LocalDateTime fechaYHora;
-        boolean valido = false;
-        do{
-            try{
-                fechaYHora = LocalDateTime.parse(mensaje);
-            }catch(NullPointerException e){
-                throw new NullPointerException("ERROR: La fecha y hora no puede ser nula.");
-            }
-        }while(!valido);
-        return fechaYHora;
-    }*/
 }

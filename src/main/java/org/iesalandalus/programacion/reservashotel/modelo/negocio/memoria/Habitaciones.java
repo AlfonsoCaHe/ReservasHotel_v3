@@ -5,7 +5,6 @@ import org.iesalandalus.programacion.reservashotel.modelo.negocio.IHabitaciones;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Habitaciones implements IHabitaciones {
 
@@ -41,11 +40,6 @@ public class Habitaciones implements IHabitaciones {
                     copiaHabitaciones.add(new Suite((Suite)h));
             }
         }
-
-        /*Iterator it = coleccionHabitaciones.iterator();
-        while(it.hasNext()){
-            copiaHabitaciones.add(new Habitacion((Habitacion) it.next()));
-        }*/
         return copiaHabitaciones;
     }
 
@@ -58,31 +52,23 @@ public class Habitaciones implements IHabitaciones {
 
         for(Habitacion h : coleccionHabitaciones){
             switch (h.getClass().getName()){
-                case "Simple":
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
                     if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
                         copiaHabitaciones.add(new Simple((Simple)h));
                     break;
-                case "Doble":
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Doble":
                     if(tipoHabitacion.toString().toUpperCase().equals("DOBLE"))
                         copiaHabitaciones.add(new Doble((Doble)h));
                     break;
-                case "Triple":
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Triple":
                     if(tipoHabitacion.toString().toUpperCase().equals("TRIPLE"))
                         copiaHabitaciones.add(new Triple((Triple)h));
                     break;
-                case "Suite":
+                case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Suite":
                     if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
                         copiaHabitaciones.add(new Suite((Suite)h));
             }
         }
-
-        /*Iterator it = coleccionHabitaciones.iterator();
-
-        while(it.hasNext()){
-            Habitacion habitacionAuxiliar = (Habitacion) it.next();
-            if(habitacionAuxiliar.getTipoHabitacion().equals(tipoHabitacion))
-                copiaHabitaciones.add(new Habitacion(habitacionAuxiliar));
-        }*/
         return copiaHabitaciones;
     }
 

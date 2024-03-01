@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Comparator;
 
 public class Reserva implements Comparable<Reserva>{
     public static int MAX_NUMERO_MESES_RESERVA = 6;//Aunque aparece como private en el diagrama, se ha modificado su visibilida para poder usarse en el test

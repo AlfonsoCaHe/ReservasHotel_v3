@@ -1,7 +1,5 @@
 package org.iesalandalus.programacion.reservashotel.vista;
 
-import javax.naming.OperationNotSupportedException;
-
 public enum Opcion {
 
     SALIR("Salir") {
@@ -28,7 +26,7 @@ public enum Opcion {
             vista.borrarHuesped();
         }
     },
-    MOSTRAR_HUESPEDES("Mostar Huéspedes"){
+    MOSTRAR_HUESPEDES("Mostrar Huéspedes"){
         @Override
         public void ejecutar() {
             vista.mostrarHuespedes();

@@ -39,7 +39,7 @@ public class Modelo {
     Crea los diferentes métodos borrar (para huesped, habitación y reserva).
     Crea los diferentes métodos get, que deben devolver una nueva lista conteniendo nuevas instancias no una copia de los elementos.
     */
-    public void insertar(Huesped huesped){
+    public void insertar(Huesped huesped)throws OperationNotSupportedException{
         try{
             huespedes.insertar(huesped);
         }catch(IllegalArgumentException e){
@@ -61,7 +61,7 @@ public class Modelo {
         return h;
     }
 
-    public void borrar(Huesped huesped){
+    public void borrar(Huesped huesped)throws OperationNotSupportedException{
         try{
             huespedes.borrar(huesped);
         }catch(IllegalArgumentException e){
@@ -143,7 +143,7 @@ public class Modelo {
         return r;
     }
 
-    public void borrar(Reserva reserva){
+    public void borrar(Reserva reserva) throws OperationNotSupportedException {
         try{
             reservas.borrar(reserva);
         }catch(IllegalArgumentException e){

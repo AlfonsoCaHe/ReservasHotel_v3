@@ -74,13 +74,13 @@ public class Reservas implements IReservas {
     /*El método borrar, si la reserva se encuentra en la colección, la borrará y desplazará los elementos hacia la izquierda
     para dejar el array compactado.
     */
-    public void borrar(Reserva reserva){
+    public void borrar(Reserva reserva) throws OperationNotSupportedException {
         try {
             if(reserva != null) {
                 if(coleccionReservas.contains(reserva)){//Si la reserva está contenida en la colección
                     coleccionReservas.remove(reserva);
                 }else {
-                    throw new IllegalArgumentException("ERROR: No existe ninguna reserva como la indicada.");
+                    throw new OperationNotSupportedException("ERROR: No existe ninguna reserva como la indicada.");
                 }
             }else{
                 throw new NullPointerException("ERROR: No se puede borrar una reserva nula.");
@@ -137,16 +137,6 @@ public class Reservas implements IReservas {
                             copiaReservas.add(r);
                 }
             }
-
-
-            /*Iterator it = coleccionReservas.iterator();
-
-            while(it.hasNext()) {
-                Reserva r = (Reserva) it.next();
-                if (r.getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
-                    copiaReservas.add(r);
-                }
-            }*/
         }catch(NullPointerException e) {
             throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
         }

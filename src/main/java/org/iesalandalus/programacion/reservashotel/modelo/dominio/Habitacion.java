@@ -17,6 +17,7 @@ public abstract class Habitacion implements Comparable<Habitacion>{
     protected String identificador;
     protected int planta;
     protected int puerta;
+
     protected double precio;
 
     /*Crea los constructores con parámetros que harán uso de los métodos de modificación.*/
@@ -126,23 +127,6 @@ public abstract class Habitacion implements Comparable<Habitacion>{
             throw new IllegalArgumentException("ERROR: No se puede establecer como precio de una habitación un valor menor que 40.0 ni mayor que 150.0.");
         }
     }
-
-
-    /*public void setTipoHabitacion(TipoHabitacion tipoHabitacion) {
-        try{
-            boolean valido = false;
-            for(TipoHabitacion aux : TipoHabitacion.values()) {
-                if(tipoHabitacion.equals(aux)) {
-                    valido = true;
-                }
-            }
-            if(!valido){
-                throw new IllegalArgumentException("");
-            }
-        }catch(NullPointerException e){
-            throw new NullPointerException("ERROR: No se puede establecer un tipo de habitación nula.");
-        }
-    }*/
 
     /*Una habitación será igual a otra si su identificador es el mismo. Basándote en ello crea los métodos equals y hashCode.*/
     @Override
