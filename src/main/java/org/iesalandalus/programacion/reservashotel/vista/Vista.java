@@ -52,7 +52,7 @@ public class Vista {
 
             System.out.print("Introduzca el dni del huésped: ");//Buscamos el huesped
             String cadena = Entrada.cadena();
-            Huesped huespedReserva = Consola.leerClientePorDni(cadena);//Obtenemos la informaci?n del huesped
+            Huesped huespedReserva = Consola.leerClientePorDni(cadena);//Obtenemos la información del huesped
             System.out.println(" ");
             if (huespedReserva != null) {
                 ArrayList<Reserva> reserva = controlador.getReservas(huespedReserva);//Obtenemos las reservas del huesped
@@ -101,7 +101,7 @@ public class Vista {
 
             System.out.print("Introduzca el dni del huesped: ");//Buscamos el huesped
             String cadena = Entrada.cadena();
-            Huesped huespedReserva = Consola.leerClientePorDni(cadena);//Obtenemos la informaci?n del huesped
+            Huesped huespedReserva = Consola.leerClientePorDni(cadena);//Obtenemos la información del huesped
             System.out.println(" ");
             if (huespedReserva != null) {
                 ArrayList<Reserva> reserva = controlador.getReservas(huespedReserva);//Obtenemos las reservas del huesped
@@ -142,8 +142,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método insertarHuesped que nos pedir? los datos de un hu?sped, haciendo uso de la clase Consola, y lo insertar? en
-    la colecci?n correspondiente si es posible o informar? del problema en caso contrario.*/
+    /*Crea el método insertarHuesped que nos pedirá los datos de un huésped, haciendo uso de la clase Consola, y lo insertará en
+    la colección correspondiente si es posible o informará del problema en caso contrario.*/
     public void insertarHuesped(){
         Huesped huesped = null;
         try{
@@ -156,11 +156,11 @@ public class Vista {
         }
     }
 
-    /*Crea el método buscarHuesped que nos pedir? el dni de un hu?sped, haciendo uso de la clase Consola, mostr?ndonos a dicho
-    huesped o informar? de que no existe o informar? del problema en caso acontecido.*/
+    /*Crea el método buscarHuesped que nos pedirá el dni de un huésped, haciendo uso de la clase Consola, mostrándonos a dicho
+    huesped o informará de que no existe o informará del problema en caso acontecido.*/
     public void buscarHuesped(){
         try{
-            if(!controlador.getHuespedes().isEmpty()){//Si el primer huesped no es vac?o, es que existen huespedes en el array
+            if(!controlador.getHuespedes().isEmpty()){//Si el primer huesped no es vacío, es que existen huespedes en el array
                 System.out.print("Introduzca el dni que desea buscar: ");
                 String dni = Entrada.cadena();
                 System.out.println(" ");
@@ -186,8 +186,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método borrarHuesped que nos pedir? el dni de un hu?sped, haciendo uso de la clase Consola, borr?ndolo si es
-    posible o informar? del problema en caso contrario.*/
+    /*Crea el método borrarHuesped que nos pedirá el dni de un huesped, haciendo uso de la clase Consola, borrándolo si es
+    posible o informará del problema en caso contrario.*/
     public void borrarHuesped(){
         try {
             if(!controlador.getHuespedes().isEmpty()) {
@@ -221,8 +221,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método mostrarHuespedes que mostrar? todos los hu?spedes almacenados si es que hay o si no, nos informar? de que
-    no hay hu?spedes.*/
+    /*Crea el método mostrarHuespedes que mostrará todos los huéspedes almacenados si es que hay o si no, nos informará de que
+    no hay huéspedes.*/
     public void mostrarHuespedes(){
         if(controlador.getHuespedes().isEmpty()){
             System.out.println("No existen registros de huéspedes.");
@@ -238,8 +238,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método insertarHabitacion que nos pedir? los datos de una habitaci?n, haciendo uso de la clase Consola, y lo
-    insertar? en la colecci?n correspondiente si es posible o informar? del problema en caso contrario.*/
+    /*Crea el método insertarHabitacion que nos pedirá los datos de una habitación, haciendo uso de la clase Consola, y lo
+    insertará en la colección correspondiente si es posible o informará del problema en caso contrario.*/
     public void insertarHabitacion(){
         Habitacion habitacion = null;
         try{
@@ -250,8 +250,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método buscarHabitacion que nos pedir? el n?mero de puerta y el n?mero de planta de una habitaci?n, haciendo uso
-    de la clase Consola, mostr?ndonos a dicha habitaci?n o informar? de que no existe o informar? del problema en caso
+    /*Crea el método buscarHabitacion que nos pedirá el n?mero de puerta y el n?mero de planta de una habitación, haciendo uso
+    de la clase Consola, mostrándonos a dicha habitación o informará de que no existe o informará del problema en caso
     acontecido.*/
     public void buscarHabitacion(){
         try{
@@ -284,8 +284,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método borrarHabitacion que nos pedir? el n?mero de puerta y el n?mero de planta de una habitaci?n, haciendo uso
-    de la clase Consola, borr?ndolo si es posible o informar? del problema en caso contrario.*/
+    /*Crea el método borrarHabitacion que nos pedirá el número de puerta y el número de planta de una habitación, haciendo uso
+    de la clase Consola, borrándolo si es posible o informará del problema en caso contrario.*/
     public void borrarHabitacion(){
         try{
             if(!controlador.getHabitaciones().isEmpty()) {
@@ -317,7 +317,7 @@ public class Vista {
         }
     }
 
-    /*Crea el método mostrarHabitaciones que mostrar? todos las habitaciones almacenadas si es que hay o si no, nos informar?
+    /*Crea el método mostrarHabitaciones que mostrará todos las habitaciones almacenadas si es que hay o si no, nos informar?
     de que no hay habitaciones.*/
     public void mostrarHabitaciones(){
         ArrayList<Habitacion> habitaciones = controlador.getHabitaciones();
@@ -335,9 +335,9 @@ public class Vista {
         }
     }
 
-    /*Crea el método insertarReserva que nos pedir? los datos de una reserva, haciendo uso de la clase Consola, y lo insertar?
-    en la colecci?n correspondiente si es posible o informar? del problema en caso contrario. Debe tenerse en cuenta que para
-    poder insertar una reserva debe haber disponibilidad del tipo de habitaci?n deseada por el hu?sped en el periodo indicado.*/
+    /*Crea el método insertarReserva que nos pedirá los datos de una reserva, haciendo uso de la clase Consola, y lo insertar?
+    en la colección correspondiente si es posible o informará del problema en caso contrario. Debe tenerse en cuenta que para
+    poder insertar una reserva debe haber disponibilidad del tipo de habitación deseada por el huésped en el periodo indicado.*/
     public void insertarReserva(){
         try{
             TipoHabitacion t = Consola.leerTipoHabitacion();
@@ -378,8 +378,9 @@ public class Vista {
         }
     }
 
-    /*Crea el método listarReservas que est? sobrecargado, mostrando todas las reservas almacenadas (si es que hay) del hu?sped,
-    del tipo de habitaci?n o de la fecha indicada como par?metro. Si no hay, nos informar? de que no hay reservas.*/
+    /*Crea el método listarReservas que está sobrecargado, mostrando todas las reservas almacenadas (si es que hay) del
+    huésped, del tipo de habitación o de la fecha indicada como parámetro. Si no hay, nos informará de que no hay
+    reservas.*/
     private void listarReservas(Huesped huesped){
         ArrayList<Reserva> reservasHuesped = controlador.getReservas(huesped);
         Collections.sort(reservasHuesped, new Comparator<Reserva>() {
@@ -427,8 +428,8 @@ public class Vista {
         }
     }
 
-    /*Crea el método getReservasAnulables que de la colecci?n de reservas recibida como par?metro, devolver? aquellas que sean
-    anulables, es decir, cuya fecha de inicio de la reserva a?n no haya llegado.*/
+    /*Crea el método getReservasAnulables que de la colección de reservas recibida como parámetro, devolverá aquellas que
+    sean anulables, es decir, cuya fecha de inicio de la reserva aún no haya llegado.*/
     public ArrayList<Reserva> getReservasAnulables(ArrayList<Reserva> reservasAAnular){
         ArrayList<Reserva> reserva = new ArrayList<>();
         try{
@@ -449,11 +450,11 @@ public class Vista {
         return reserva;
     }
 
-    /*Crea el método anularReserva que pedir? el dni del hu?sped del que se desea anular una reserva (haciendo uso de la clase
-    Consola), obteniendo de todas las reservas de dicho hu?sped aquellas que sean anulables. En el caso de que no tenga ninguna
-    anulable deber? de informarse de dicha circunstancia. Si solo tiene una reserva anulable deber? confirmarse de que realmente
-    se quiere anular. Y por ?ltimo, en el caso de que el hu?sped tenga m?s de una reserva anulable, deber?n ser listadas
-    precedidas por un n?mero para que el usuario elija la reserva que desea anular. */
+    /*Crea el método anularReserva que pedirá el dni del huésped del que se desea anular una reserva (haciendo uso de la clase
+    Consola), obteniendo de todas las reservas de dicho huésped aquellas que sean anulables. En el caso de que no tenga ninguna
+    anulable deberá de informarse de dicha circunstancia. Si solo tiene una reserva anulable deberá confirmarse de que realmente
+    se quiere anular. Y por último, en el caso de que el huésped tenga más de una reserva anulable, deberán ser listadas
+    precedidas por un número para que el usuario elija la reserva que desea anular. */
     public void anularReserva() {
         try {
             System.out.print("Introduzca el dni del cliente: ");
@@ -504,7 +505,7 @@ public class Vista {
         }
     }
 
-    /*Crea el método mostrarReservas que mostrar? todas las reservas almacenadas si es que hay o si no, nos informar? de que no
+    /*Crea el método mostrarReservas que mostrará todas las reservas almacenadas si es que hay o si no, nos informará de que no
     hay reservas. */
     public void mostrarReservas(){
         int opcion = 0;
@@ -541,16 +542,16 @@ public class Vista {
         }
     }
 
-    /*Crea el método consultarDisponibilidad que devuelve una habitaci?n del tipo indicado por par?metro y que est? disponible
-    entre las fechas de inicio y fin de la reserva, tambi?n indicados por par?metro.*/
+    /*Crea el método consultarDisponibilidad que devuelve una habitación del tipo indicado por parámetro y que está disponible
+    entre las fechas de inicio y fin de la reserva, también indicados por parámetro.*/
     public Habitacion consultarDisponibilidad(TipoHabitacion tipoHabitacion, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
         Habitacion habitacion = null;
 
         try{
             ArrayList<Habitacion> habitacionesDisponibles = controlador.getHabitaciones(tipoHabitacion);//Creamos una copia profunda de todas las habitaciones del hotel que sean del tipo solicitado.
             /*
-            Ahora vamos a eliminar aquellas habitaciones del tipo esperado que est?n ocupadas en la fecha solicitada.
-            Para ello vamos a crear otra copia de las reservas del tipo de habitaci?n y las vamos a ir recorriendo para
+            Ahora vamos a eliminar aquellas habitaciones del tipo esperado que están ocupadas en la fecha solicitada.
+            Para ello vamos a crear otra copia de las reservas del tipo de habitación y las vamos a ir recorriendo para
             borrar aquellas habitaciones que no est?n disponibles en el intervalo de fechas solicitado.
             */
             ArrayList<Reserva> reservas = controlador.getReservas(tipoHabitacion);
@@ -558,18 +559,18 @@ public class Vista {
 
             while(it.hasNext() && !habitacionesDisponibles.isEmpty()){
                 Reserva r = (Reserva) it.next();
-                if(fechaInicioReserva.isBefore(r.getFechaFinReserva()) && fechaFinReserva.isAfter(r.getFechaInicioReserva())){//Si la fecha de inicio de la reserva es anterior a la fecha de la reserva y la fecha de fin de la reserva es mayor que la de inicio. La habitaci?n estar? ocupada. Por tanto se borra.
-                    if(habitacionesDisponibles.contains(r.getHabitacion())){//Nos aseguramos que la habitaci?n no haya sido borrada ya
+                if(fechaInicioReserva.isBefore(r.getFechaFinReserva()) && fechaFinReserva.isAfter(r.getFechaInicioReserva())){//Si la fecha de inicio de la reserva es anterior a la fecha de la reserva y la fecha de fin de la reserva es mayor que la de inicio. La habitación estará ocupada. Por tanto se borra.
+                    if(habitacionesDisponibles.contains(r.getHabitacion())){//Nos aseguramos que la habitación no haya sido borrada ya
                         habitacionesDisponibles.remove(r.getHabitacion());
                     }
                 }else{
-                    if(fechaInicioReserva.equals(r.getFechaInicioReserva())){//Si las fechas de inicio coindicen, la habitaci?n no estar? disponible. Por tanto se borra.
-                        if(habitacionesDisponibles.contains(r.getHabitacion())){//Nos aseguramos que la habitaci?n no haya sido borrada ya
+                    if(fechaInicioReserva.equals(r.getFechaInicioReserva())){//Si las fechas de inicio coinciden, la habitación no estará disponible. Por tanto se borra.
+                        if(habitacionesDisponibles.contains(r.getHabitacion())){//Nos aseguramos que la habitación no haya sido borrada ya
                             habitacionesDisponibles.remove(r.getHabitacion());
                         }
                     }else{//Solo queda que la fecha de inicio fuera posterior a la fecha de inicio de la reserva
-                        if(fechaInicioReserva.isAfter(r.getFechaInicioReserva()) && fechaInicioReserva.isBefore(r.getFechaFinReserva())){//Si la fecha de inicio es posterior a la de inicio de la reserva y anterior de a la de fin de la reserva, no estar? disponible. Por tanto se borra.
-                            if(habitacionesDisponibles.contains(r.getHabitacion())){//Nos aseguramos que la habitaci?n no haya sido borrada ya
+                        if(fechaInicioReserva.isAfter(r.getFechaInicioReserva()) && fechaInicioReserva.isBefore(r.getFechaFinReserva())){//Si la fecha de inicio es posterior a la de inicio de la reserva y anterior de a la de fin de la reserva, no estará disponible. Por tanto se borra.
+                            if(habitacionesDisponibles.contains(r.getHabitacion())){//Nos aseguramos que la habitación no haya sido borrada ya
                                 habitacionesDisponibles.remove(r.getHabitacion());
                             }
                         }
@@ -592,7 +593,7 @@ public class Vista {
             @Override
             public int compare(Reserva o1, Reserva o2) {
                 int valor = 0;//Definimos como valor por defecto que las reservas sean iguales
-                if(o1.getFechaInicioReserva().isBefore(o2.getFechaInicioReserva())){//Si la fecha de inicio es anterior va despu?s
+                if(o1.getFechaInicioReserva().isBefore(o2.getFechaInicioReserva())){//Si la fecha de inicio es anterior va después
                     valor = 1;
                 }else{
                     if(o1.getFechaInicioReserva().isAfter(o2.getFechaInicioReserva())){//Si la fecha de inicio es posterior va primero

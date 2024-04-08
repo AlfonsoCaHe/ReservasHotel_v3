@@ -118,7 +118,7 @@ public class Reservas implements IReservas {
                 throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
             }
 
-            for(Reserva r : coleccionReservas){
+            /*for(Reserva r : coleccionReservas){
                 switch (r.getHabitacion().getClass().getName()){
                     case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
                         if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
@@ -136,7 +136,26 @@ public class Reservas implements IReservas {
                         if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
                             copiaReservas.add(r);
                 }
+            }*/
+            for(Reserva r : coleccionReservas){
+                if(r.getHabitacion() instanceof Simple){
+                    if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
+                        copiaReservas.add(r);
+                }
+                if(r.getHabitacion() instanceof Doble){
+                    if(tipoHabitacion.toString().toUpperCase().equals("DOBLE"))
+                        copiaReservas.add(r);
+                }
+                if(r.getHabitacion() instanceof Triple){
+                    if(tipoHabitacion.toString().toUpperCase().equals("TRIPLE"))
+                        copiaReservas.add(r);
+                }
+                if(r.getHabitacion() instanceof Suite){
+                    if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
+                        copiaReservas.add(r);
+                }
             }
+
         }catch(NullPointerException e) {
             throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
         }

@@ -25,7 +25,7 @@ public class Habitaciones implements IHabitaciones {
     private ArrayList<Habitacion> copiaProfundaHabitaciones(){
         ArrayList<Habitacion> copiaHabitaciones = new ArrayList<>();
 
-        for(Habitacion h : coleccionHabitaciones){
+        /*for(Habitacion h : coleccionHabitaciones){
             switch (h.getClass().getName()){
                 case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
                     copiaHabitaciones.add(new Simple((Simple)h));
@@ -39,7 +39,19 @@ public class Habitaciones implements IHabitaciones {
                 case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Suite":
                     copiaHabitaciones.add(new Suite((Suite)h));
             }
+        }*/
+
+        for(Habitacion h : coleccionHabitaciones){
+            if(h instanceof Simple)
+                    copiaHabitaciones.add(new Simple((Simple)h));
+            if(h instanceof Doble)
+                    copiaHabitaciones.add(new Doble((Doble)h));
+            if(h instanceof Triple)
+                    copiaHabitaciones.add(new Triple((Triple)h));
+            if(h instanceof Suite)
+                    copiaHabitaciones.add(new Suite((Suite)h));
         }
+
         return copiaHabitaciones;
     }
 
@@ -50,7 +62,7 @@ public class Habitaciones implements IHabitaciones {
     public ArrayList<Habitacion> get(TipoHabitacion tipoHabitacion) {
         ArrayList<Habitacion> copiaHabitaciones = new ArrayList<>();
 
-        for(Habitacion h : coleccionHabitaciones){
+        /*for(Habitacion h : coleccionHabitaciones){
             switch (h.getClass().getName()){
                 case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
                     if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
@@ -68,7 +80,26 @@ public class Habitaciones implements IHabitaciones {
                     if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
                         copiaHabitaciones.add(new Suite((Suite)h));
             }
+        }*/
+        for(Habitacion h : coleccionHabitaciones){
+            if(h instanceof Simple){
+                if(tipoHabitacion.toString().toUpperCase().equals("SIMPLE"))
+                    copiaHabitaciones.add(new Simple((Simple)h));
+            }
+            if(h instanceof Doble){
+                if(tipoHabitacion.toString().toUpperCase().equals("DOBLE"))
+                    copiaHabitaciones.add(new Doble((Doble)h));
+            }
+            if(h instanceof Triple){
+                if(tipoHabitacion.toString().toUpperCase().equals("TRIPLE"))
+                    copiaHabitaciones.add(new Triple((Triple)h));
+            }
+            if(h instanceof Suite){
+                if(tipoHabitacion.toString().toUpperCase().equals("SUITE"))
+                    copiaHabitaciones.add(new Suite((Suite)h));
+            }
         }
+
         return copiaHabitaciones;
     }
 

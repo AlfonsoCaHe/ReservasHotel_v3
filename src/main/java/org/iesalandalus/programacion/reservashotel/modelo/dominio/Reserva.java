@@ -75,7 +75,24 @@ public class Reserva implements Comparable<Reserva>{
     }
 
     public Habitacion getHabitacion() {
-        return this.habitacion;
+        //comprobamos el tipo de habitación y devolvemos una copia para evitar el aliasing
+        Habitacion h = null;
+        if(this.habitacion instanceof Simple){
+            h = new Simple((Simple)this.habitacion);
+        }
+        if (this.habitacion instanceof Doble) {
+            h = new Doble((Doble)this.habitacion);
+        }
+        if(this.habitacion instanceof Triple){
+            h = new Triple((Triple)this.habitacion);
+        }
+        if(this.habitacion instanceof Suite){
+            h = new Suite((Suite)this.habitacion);
+        }
+        if(h == null){
+            throw new IllegalArgumentException("ERROR: tipo de habitación inesperado.");
+        }
+        return h;
     }
 
     public Regimen getRegimen() {
@@ -121,12 +138,28 @@ public class Reserva implements Comparable<Reserva>{
     public void setHabitacion(Habitacion habitacion) {
         try{
             if(habitacion != null) {
-                this.habitacion = habitacion;
+                //comprobamos el tipo de habitación y devolvemos una copia para evitar el aliasing
+                Habitacion h = null;
+                if(habitacion instanceof Simple){
+                    h = new Simple((Simple) habitacion);
+                }
+                if (habitacion instanceof Doble) {
+                    h = new Doble((Doble) habitacion);
+                }
+                if(habitacion instanceof Triple){
+                    h = new Triple((Triple) habitacion);
+                }
+                if(habitacion instanceof Suite){
+                    h = new Suite((Suite) habitacion);
+                }
+                this.habitacion = h;
             }else{
                 throw new NullPointerException("ERROR: La habitación de una reserva no puede ser nula.");
             }
         }catch(NullPointerException e){
             throw new NullPointerException("ERROR: La habitación de una reserva no puede ser nula.");
+        }catch(ClassCastException e){
+            throw new ClassCastException("ERROR: Tipo de habitación inesperado.");
         }
     }
 
@@ -230,7 +263,7 @@ public class Reserva implements Comparable<Reserva>{
     public void setNumeroPersonas(int numeroPersonas) {
         try{
             if(numeroPersonas <= habitacion.getNumeroMaximoPersonas()){
-                if(numeroPersonas > 0) {//El n?mero de personas de una habitación no puede exceder del máximo ni ser inferior a 1
+                if(numeroPersonas > 0) {//El número de personas de una habitación no puede exceder del máximo ni ser inferior a 1
                     this.numeroPersonas = numeroPersonas;
                 }else{
                     throw new IllegalArgumentException("ERROR: El número de personas de una reserva no puede ser menor o igual a 0.");
@@ -269,7 +302,7 @@ public class Reserva implements Comparable<Reserva>{
             cadenaCheckOut = getCheckOut().format(pattern);
         }
         String tipo = " ";
-        switch (getHabitacion().getClass().getName()){
+        /*switch (getHabitacion().getClass().getName()){
             case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Simple":
                 tipo = "simple";
                 break;
@@ -281,7 +314,16 @@ public class Reserva implements Comparable<Reserva>{
                 break;
             case "org.iesalandalus.programacion.reservashotel.modelo.dominio.Suite":
                 tipo = "suite";
-        }
+        }*/
+
+        if(getHabitacion() instanceof Simple)
+                tipo = "simple";
+        if(getHabitacion() instanceof Doble)
+                tipo = "doble";
+        if(getHabitacion() instanceof Triple)
+                tipo = "triple";
+        if(getHabitacion() instanceof Suite)
+                tipo = "suite";
 
 
         /*return String.format("Huesped: %s %s Habitación:identificador=%s (%d-%d), precio habitación=%d, habitación %s, capacidad=%d personas Fecha Inicio Reserva: %s Fecha Fin Reserva: %s Checkin: %s Checkout: %s", getHuesped().getNombre(), getHuesped().getDni(),

@@ -52,7 +52,11 @@ public class Triple extends Habitacion{
     }
 
     public void setNumCamasIndividuales(int numCamasIndividuales) {
-        this.numCamasIndividuales = numCamasIndividuales;
+        if(numCamasIndividuales >= MIN_NUM_CAMAS_INDIVIDUALES && numCamasIndividuales <= MAX_NUM_CAMAS_INDIVIDUALES) {
+            this.numCamasIndividuales = numCamasIndividuales;
+        }else{
+            throw new IllegalArgumentException("ERROR: El número de camas individuales de una habitación triple no puede ser inferior a 1 ni mayor que 3");
+        }
     }
 
     public int getNumCamasDobles() {
@@ -60,7 +64,11 @@ public class Triple extends Habitacion{
     }
 
     public void setNumCamasDobles(int numCamasDobles) {
-        this.numCamasDobles = numCamasDobles;
+        if(numCamasDobles >= MIN_NUM_CAMAS_DOBLES && numCamasDobles <= MAX_NUM_CAMAS_DOBLES) {
+            this.numCamasDobles = numCamasDobles;
+        }else{
+            throw new IllegalArgumentException("ERROR: El número de camas dobles de una habitación triple no puede ser inferior a 0 ni mayor que 1");
+        }
     }
 
     private void validaNumCamas(){
